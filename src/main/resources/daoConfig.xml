@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd"
+>
+
+    <!--配置java类使得可以使用占位符$，属性文件路劲由location指定-->
+    <context:property-placeholder location="classpath:databases.properties" />
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+        p:driverClassName="${mysql.driven}"
+        p:url="${mysql.url}"
+        p:username="${mysql.user}"
+        p:password="${mysql.password}"
+        />
+
+    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"-->
+          <!--p:basePackage="com.example.mybatis"/>-->
+
+    <!--&lt;!&ndash;配置mybatis&ndash;&gt;-->
+    <!--<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"-->
+        <!--p:dataSource-ref="dataSource"-->
+        <!--p:configLocation="classpath:mybatisConfig.xml">-->
+    <!--</bean>-->
+
+    <!--<bean id="schoolMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"-->
+          <!--p:mapperInterface="persistence.mybatis.SchoolMapper"-->
+          <!--p:sqlSessionFactory-ref="sqlSessionFactory"-->
+    <!--/>-->
+    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"-->
+          <!--p:basePackage="persistence.mybatis"-->
+          <!--p:sqlSessionFactoryBeanName="sqlSessionFactory"-->
+    <!--/>-->
+</beans>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatis.SchoolMapper">
+    <select id="selectSchoolById" resultType="School">
+        SELECT * FROM school WHERE id = #{id}
+    </select>
+
+    <select id="selectSchoolsByProvince" resultType="School">
+        SELECT * FROM school WHERE province = #{province}
+    </select>
+
+    <select id="selectSchoolByName" resultType="School">
+        SELECT * FROM school WHERE name = #{name}
+    </select>
+
+    <insert id="insertOne" useGeneratedKeys="true" keyProperty="school.id">
+        INSERT INTO school (name, descp, province)
+        VALUES (#{school.name}, #{school.descp}, #{school.province})
+    </insert>
+
+    <insert id="insertMany" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO school (name, descp, province) VALUES
+        <!-- 批量插入时collection必须命名为list,Map,或set,这应该是个bug -->
+        <foreach collection="list" item="school" separator=",">
+            (#{school.name}, #{school.descp}, #{school.province})
+        </foreach>
+    </insert>
+
+</mapper>
