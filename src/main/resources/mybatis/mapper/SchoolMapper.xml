@@ -7,7 +7,7 @@
         SELECT * FROM school WHERE id = #{id}
     </select>
 
-    <select id="selectSchoolsByProvince" resultType="School">
+    <select id="selectSchoolListByProvince" resultType="School">
         SELECT * FROM school WHERE province = #{province}
     </select>
 

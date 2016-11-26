@@ -11,6 +11,12 @@ import java.util.List;
  */
 @Mapper
 public interface DepartmentMapper {
-    public Department selectDepartmentById(@Param("id") int id);
-    public List<Department> selectDepartmentsBySchoolId(@Param("schoolId") int schoolId);
+    // 测试通过
+    Department selectDepartmentById(@Param("id") int id);
+    List<Department> selectDepartmentListBySchoolId(@Param("schoolId") int schoolId);
+    List<Department> selectDepartmentListBySchoolName(String schoolName);
+    Department selectDepartmentBySchoolIdAndDepartmentName(@Param("schoolId") int schoolId, @Param("departmentName") String departmentName);
+    Department selectDepartmentBySchoolNameAndDepartmentName(@Param("schoolName") String schoolName, @Param("departmentName") String departmentName);
+
+    int insertOne(Department department);
 }

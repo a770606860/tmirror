@@ -15,7 +15,7 @@ public interface SchoolMapper {
     // select语句,已测试
     School selectSchoolById(@Param("id") int id);
 
-    List<School> selectSchoolsByProvince(@Param("province") Province province);
+    List<School> selectSchoolListByProvince(@Param("province") Province province);
 
     School selectSchoolByName(@Param("name") String name);
 

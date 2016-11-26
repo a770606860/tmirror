@@ -11,7 +11,28 @@
         select * from department where id = #{id}
     </select>
     
-    <select id="selectDepartmentsBySchoolId" resultMap="Department">
+    <select id="selectDepartmentListBySchoolId" resultMap="Department">
         SELECT * FROM department where school_id = #{schoolId}
     </select>
+
+    <select id="selectDepartmentListBySchoolName" resultMap="Department">
+        SELECT D.id AS id, D.name as name, D.descp as descp, D.school_id as school_id
+        FROM department as D, school as S
+        where D.school_id = S.id and S.name = #{schoolName}
+    </select>
+
+    <select id="selectDepartmentBySchoolIdAndDepartmentName" resultMap="Department">
+        SELECT * FROM department where school_id = #{schoolId} AND name = #{departmentName}
+    </select>
+
+    <select id="selectDepartmentBySchoolNameAndDepartmentName" resultMap="Department">
+        SELECT D.id AS id, D.name as name, D.descp as descp, D.school_id as school_id
+        FROM department as D, school as S
+        where D.school_id = S.id and S.name = #{schoolName} and D.name = #{departmentName}
+    </select>
+
+    <insert id="insertOne" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO department (name, descp, school_id)
+    VALUES (#{name}, #{descp}, #{schoolId})
+</insert>
 </mapper>
