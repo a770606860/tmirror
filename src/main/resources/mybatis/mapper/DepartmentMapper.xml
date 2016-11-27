@@ -7,25 +7,25 @@
         <result column="school_id" property="schoolId" />
     </resultMap>
     
-    <select id="selectDepartmentById" resultMap="Department">
+    <select id="selectById" resultMap="Department">
         select * from department where id = #{id}
     </select>
     
-    <select id="selectDepartmentListBySchoolId" resultMap="Department">
+    <select id="selectManyBySchoolId" resultMap="Department">
         SELECT * FROM department where school_id = #{schoolId}
     </select>
 
-    <select id="selectDepartmentListBySchoolName" resultMap="Department">
+    <select id="selectManyBySchoolName" resultMap="Department">
         SELECT D.id AS id, D.name as name, D.descp as descp, D.school_id as school_id
         FROM department as D, school as S
         where D.school_id = S.id and S.name = #{schoolName}
     </select>
 
-    <select id="selectDepartmentBySchoolIdAndDepartmentName" resultMap="Department">
+    <select id="selectBySchoolIdAndDepartmentName" resultMap="Department">
         SELECT * FROM department where school_id = #{schoolId} AND name = #{departmentName}
     </select>
 
-    <select id="selectDepartmentBySchoolNameAndDepartmentName" resultMap="Department">
+    <select id="selectBySchoolNameAndDepartmentName" resultMap="Department">
         SELECT D.id AS id, D.name as name, D.descp as descp, D.school_id as school_id
         FROM department as D, school as S
         where D.school_id = S.id and S.name = #{schoolName} and D.name = #{departmentName}
@@ -34,5 +34,13 @@
     <insert id="insertOne" useGeneratedKeys="true" keyProperty="id">
     INSERT INTO department (name, descp, school_id)
     VALUES (#{name}, #{descp}, #{schoolId})
-</insert>
+    </insert>
+
+    <insert id="insertMany" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO department (name, descp, school_id)
+        VALUES
+        <foreach collection="list" separator="," item="item">
+            (#{item.name}, #{item.descp}, #{item,schoolId})
+        </foreach>
+    </insert>
 </mapper>

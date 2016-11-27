@@ -3,15 +3,15 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mybatis.SchoolMapper">
-    <select id="selectSchoolById" resultType="School">
+    <select id="selectById" resultType="School">
         SELECT * FROM school WHERE id = #{id}
     </select>
 
-    <select id="selectSchoolListByProvince" resultType="School">
+    <select id="selectManyByProvince" resultType="School">
         SELECT * FROM school WHERE province = #{province}
     </select>
 
-    <select id="selectSchoolByName" resultType="School">
+    <select id="selectByName" resultType="School">
         SELECT * FROM school WHERE name = #{name}
     </select>
 

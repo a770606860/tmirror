@@ -22,6 +22,11 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+
+        <jdbc.url>jdbc:mysql://localhost:3306/demo?useUnicode=true&amp;characterEncoding=UTF-8</jdbc.url>
+        <jdbc.driven>com.mysql.jdbc.Driver</jdbc.driven>
+        <jdbc.user>root</jdbc.user>
+        <jdbc.password>1234</jdbc.password>
 	</properties>
 
 	<dependencies>
@@ -54,14 +59,60 @@
 			<version>0.28</version>
 		</dependency>
 
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <!-- Replace with the version of the MySQL driver you want to use -->
+            <version>5.1.28</version>
+        </dependency>
 	</dependencies>
 
 	<build>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>sql-maven-plugin</artifactId>
+                <version>1.5</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <!-- Replace with the version of the MySQL driver you want to use -->
+                        <version>5.1.28</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <url>${jdbc.url}</url>
+                    <username>${jdbc.user}</username>
+                    <password>${jdbc.password}</password>
+                    <driver>${jdbc.driven}</driver>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <id>initialize-database</id>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <autocommit>true</autocommit>
+                            <srcFiles>
+                                <file>src/main/resources/databaseInitialize/demo.sql</file>
+                            </srcFiles>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 		</plugins>
 	</build>
 

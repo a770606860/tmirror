@@ -14,10 +14,10 @@
     <context:property-placeholder location="classpath:databases.properties" />
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-        p:driverClassName="${mysql.driven}"
-        p:url="${mysql.url}"
-        p:username="${mysql.user}"
-        p:password="${mysql.password}"
+        p:driverClassName="${jdbc.driven}"
+        p:url="${jdbc.url}"
+        p:username="${jdbc.user}"
+        p:password="${jdbc.password}"
         />
 
     <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"-->

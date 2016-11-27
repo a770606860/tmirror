@@ -14,6 +14,6 @@ public class SchoolServiceImp implements SchoolService {
     private SchoolMapper schoolMapper;
 
     public School selectSchoolById(int id) {
-        return schoolMapper.selectSchoolById(id);
+        return schoolMapper.selectById(id);
     }
 }

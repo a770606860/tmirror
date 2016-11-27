@@ -13,11 +13,11 @@ import java.util.List;
 @Mapper
 public interface SchoolMapper {
     // select语句,已测试
-    School selectSchoolById(@Param("id") int id);
+    School selectById(@Param("id") int id);
 
-    List<School> selectSchoolListByProvince(@Param("province") Province province);
+    List<School> selectManyByProvince(@Param("province") Province province);
 
-    School selectSchoolByName(@Param("name") String name);
+    School selectByName(@Param("name") String name);
 
     // insert语句，已测试
     // 如果违反约束将会抛出异常
